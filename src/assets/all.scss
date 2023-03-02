@@ -1,0 +1,9 @@
+@import "bootstrap/scss/functions";
+
+@import "./variables";
+
+@import 'bootstrap/scss/bootstrap';
+
+img {
+    object-fit: cover;
+}

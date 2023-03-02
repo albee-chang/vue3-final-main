@@ -1,0 +1,155 @@
+<template>
+  <div class="my-5 row justify-content-center">
+    <h5 class="text-center">填寫訂購表單</h5>
+    <div style="width: 60vw" class="my-5">
+      <div class="position-relative m-4">
+        <div class="progress" style="height: 1px">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            style="width: 50%"
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+        <button
+          type="button"
+          class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
+          style="width: 6rem; height: 2rem"
+        >商品確認
+        </button>
+        <button
+          type="button"
+          class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
+          style="width: 6rem; height: 2rem"
+        >表單填寫
+        </button>
+        <button
+          type="button"
+          class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+          style="width: 6rem; height: 2rem"
+        >
+          訂購完成
+        </button>
+
+      </div>
+    </div>
+    <VueForm
+      ref="form"
+      class="col-md-6"
+      v-slot="{ errors }"
+      @submit="createOrder"
+    >
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <VueField
+          id="email"
+          name="email"
+          type="email"
+          class="form-control"
+          :class="{ 'is-invalid': errors['email'] }"
+          placeholder="請輸入 Email"
+          rules="email|required"
+          v-model="form.user.email"
+        ></VueField>
+        <error-message name="email" class="invalid-feedback"></error-message>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">收件人姓名</label>
+        <VueField
+          id="name"
+          name="姓名"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': errors['姓名'] }"
+          placeholder="請輸入姓名"
+          rules="required"
+          v-model="form.user.name"
+        ></VueField>
+        <error-message name="姓名" class="invalid-feedback"></error-message>
+      </div>
+
+      <div class="mb-3">
+        <label for="tel" class="form-label">收件人電話</label>
+        <VueField
+          id="tel"
+          name="電話"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': errors['電話'] }"
+          placeholder="請輸入電話"
+          rules="required|min:8|max:10"
+          v-model="form.user.tel"
+        ></VueField>
+        <error-message name="電話" class="invalid-feedback"></error-message>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">收件人地址</label>
+        <VueField
+          id="address"
+          name="地址"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': errors['地址'] }"
+          placeholder="請輸入地址"
+          rules="required"
+          v-model="form.user.address"
+        ></VueField>
+        <error-message name="地址" class="invalid-feedback"></error-message>
+      </div>
+
+      <div class="mb-3">
+        <label for="message" class="form-label">留言</label>
+        <textarea
+          id="message"
+          class="form-control"
+          cols="30"
+          rows="10"
+          v-model="form.message"
+        ></textarea>
+      </div>
+      <div class="text-end">
+        <button type="submit" class="btn btn-danger">送出訂單</button>
+      </div>
+    </VueForm>
+  </div>
+</template>
+<script>
+import Swal from "sweetalert2";
+
+const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+export default {
+  data() {
+    return {
+      cart: {},
+      form: {
+        user: {
+          name: "",
+          email: "",
+          tel: "",
+          address: "",
+        },
+        message: "",
+      },
+    };
+  },
+  methods: {
+    createOrder() {
+      this.$http
+        .post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/order`, {
+          data: this.form,
+        })
+        .then((res) => {
+          Swal.fire(`${res.data.message}`);
+          this.$refs.form.resetForm();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
+</script>
