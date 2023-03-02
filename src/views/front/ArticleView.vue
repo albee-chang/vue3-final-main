@@ -6,15 +6,17 @@
           <RouterLink to="/news">回到所有文章列表</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-            {{ article.title }}
-          </li>
+          {{ article.title }}
+        </li>
       </ol>
     </nav>
     <div class="row justify-content-center">
       <article class="col-8">
         <h2>{{ article.title }}</h2>
         <p>
-          <small class="text-muted">{{ article.create_at }}</small>
+          <small class="text-muted">{{
+            formattedDate(article.create_at)
+          }}</small>
           -
           <small class="text-muted">作者：{{ article.author }}</small>
         </p>
@@ -33,6 +35,7 @@ export default {
     return {
       article: {},
       id: "",
+      timestamp: "",
     };
   },
   components: { RouterLink },
@@ -50,6 +53,15 @@ export default {
           this.isLoading = false;
           console.log(error.response, "錯誤訊息");
         });
+    },
+    formattedDate(timestamp) {
+      const date = new Date(timestamp * 1000); // 將秒數轉換為毫秒數
+      const options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      };
+      return new Intl.DateTimeFormat("zh-TW", options).format(date);
     },
   },
   created() {

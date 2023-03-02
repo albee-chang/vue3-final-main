@@ -51,54 +51,17 @@
     </div>
   </nav>
 
-  <!-- Page Wrapper -->
   <div id="wrapper" class="row">
-    <!-- Sidebar -->
-    <ul class="col-2 navbar-nav bg-secondary p-3 mb-5">
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active"><h5>後台管理中心</h5></li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-      <!-- Heading -->
-      <div class="sidebar-heading">商品管理</div>
-      <div class="sidebar-heading">訂單管理</div>
-      <div class="sidebar-heading">文章管理</div>
-      <div class="sidebar-heading">優惠券管理</div>
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Heading -->
-      <div class="sidebar-heading">銷售紀錄</div>
-      <div class="sidebar-heading">商品庫存</div>
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="col-10 d-flex flex-column">
-      <!-- Main Content -->
+    <div class="d-flex flex-column">
       <div id="content">
-        <!-- Begin Page Content -->
         <div class="container-fluid">
-          <!-- Page Heading -->
           <div class="container">
             <RouterView></RouterView>
           </div>
         </div>
       </div>
-      <!-- End of Main Content -->
     </div>
-    <!-- End of Content Wrapper -->
   </div>
-  <!-- Footer -->
-  <footer class="container-fluid bg-secondary text-dark p-5">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>Copyright &copy; 綠職工作坊 2023</span>
-      </div>
-    </div>
-  </footer>
-  <!-- End of Footer -->
 
   <!-- Logout Modal-->
   <div

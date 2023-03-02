@@ -14,7 +14,7 @@
     <tbody>
       <template v-for="(item, key) in orders" :key="key">
         <tr v-if="orders.length" :class="{ 'text-primary': !item.is_paid }">
-          <td>{{ new Date(item.create_at) }}</td>
+          <td>{{ formattedDate(item.create_at) }}</td>
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
             <ul class="list-unstyled">
@@ -151,6 +151,15 @@ export default {
           this.isLoading = false;
           console.log(error.response, "錯誤訊息");
         });
+    },
+    formattedDate(timestamp) {
+      const date = new Date(timestamp * 1000); // 將秒數轉換為毫秒數
+      const options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      };
+      return new Intl.DateTimeFormat("zh-TW", options).format(date);
     },
   },
   mounted() {

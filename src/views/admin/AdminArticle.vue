@@ -22,7 +22,7 @@
           <td>{{ article.title }}</td>
           <td>{{ article.author }}</td>
           <td>{{ article.description }}</td>
-          <td>{{ article.create_at }}</td>
+          <td>{{ formattedDate(article.create_at) }}</td>
           <td>
             <span v-if="article.isPublic">已上架</span>
             <span v-else>未上架</span>
@@ -176,6 +176,15 @@ export default {
           this.isLoading = false;
           console.log(error.response, "刪除貼文");
         });
+    },
+    formattedDate(timestamp) {
+      const date = new Date(timestamp * 1000); // 將秒數轉換為毫秒數
+      const options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      };
+      return new Intl.DateTimeFormat("zh-TW", options).format(date);
     },
   },
   mounted() {

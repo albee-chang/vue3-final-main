@@ -11,8 +11,10 @@
         <tr>
           <th width="120">分類</th>
           <th>產品名稱</th>
-          <th width="120">原價</th>
+          <th width="120">圖片</th>
+          <th width="60"></th>
           <th width="120">售價</th>
+          <th width="100">原價</th>
           <th width="100">是否啟用</th>
           <th width="200">編輯</th>
         </tr>
@@ -21,8 +23,10 @@
         <tr v-for="item in products" :key="item.id">
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
-          <td class="text-right"></td>
-          <td class="text-right"></td>
+          <td><img :src="item.imageUrl" class="img-fluid w-100 " style="height: 70px"></td>
+          <td></td>
+          <td class="text-right">{{ item.origin_price }}</td>
+          <td class="text-right fw-bold text-danger">{{ item.price }}</td>
           <td>
             <span v-if="item.is_enabled" class="text-success">啟用</span>
             <span v-else>未啟用</span>
