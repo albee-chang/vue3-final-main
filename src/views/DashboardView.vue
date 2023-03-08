@@ -55,7 +55,7 @@
     <div class="d-flex flex-column">
       <div id="content">
         <div class="container-fluid">
-          <div class="container">
+          <div class="container" v-if="this.status == true">
             <RouterView></RouterView>
           </div>
         </div>
@@ -100,10 +100,14 @@
 </template>
 
 <script>
-import Swal from "sweetalert2";
 import { RouterView } from "vue-router";
 const { VITE_APP_URL } = import.meta.env;
 export default {
+  data() {
+    return {
+      status: false,
+    };
+  },
   components: [RouterView],
   methods: {
     logout() {
@@ -122,6 +126,8 @@ export default {
       this.$http.post(url).then((res) => {
         if (!res.data.success) {
           this.$router.push("/login");
+        } else {
+          this.status = true;
         }
       });
     },

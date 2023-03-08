@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal fade"
-    id="productModal"
+    id="orderModal"
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
@@ -11,7 +11,7 @@
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title" id="exampleModalLabel">
+          <h5 class="modal-title">
             <span>訂單細節</span>
           </h5>
           <button
@@ -56,15 +56,14 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{ tempOrder.create_at }}</td>
+                    <td>{{ formattedDate(tempOrder.create_at) }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
                     <td>
-                      <span v-if="tempOrder.paid_date">
-                        {{ tempOrder.paid_date }}
+                      <span>
+                        {{ formattedDate(tempOrder.create_at) }}
                       </span>
-                      <span v-else>時間不正確</span>
                     </td>
                   </tr>
                   <tr>
@@ -130,7 +129,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            @click="$emit('update-paid', tempOrder)"
+            @click="() => $emit('update-paid', tempOrder)"
           >
             修改付款狀態
           </button>
@@ -158,6 +157,17 @@ export default {
       tempOrder: {},
       isPaid: false,
     };
+  },
+  methods: {
+    formattedDate(timestamp) {
+      const date = new Date(timestamp * 1000); // 將秒數轉換為毫秒數
+      const options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      };
+      return new Intl.DateTimeFormat("zh-TW", options).format(date);
+    },
   },
   emits: ["update-paid"],
   mixins: [modalMixin],

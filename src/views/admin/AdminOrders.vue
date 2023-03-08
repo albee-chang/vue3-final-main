@@ -32,7 +32,7 @@
                 type="checkbox"
                 :id="`${item.id}`"
                 v-model="item.is_paid"
-                @change="updatePaid(item)"
+                @change="() => updatePaid(item)"
               />
               <label class="form-check-label" :for="`${item.id}`">
                 <span v-if="item.is_paid">已付款</span>
@@ -45,14 +45,14 @@
               <button
                 class="btn btn-outline-primary btn-sm"
                 type="button"
-                @click="openModal(item)"
+                @click="() => openModal(item)"
               >
                 檢視
               </button>
               <button
                 class="btn btn-outline-danger btn-sm"
                 type="button"
-                @click="openDelOrderModal(item)"
+                @click="() => openDelOrderModal(item)"
               >
                 刪除
               </button>
@@ -76,6 +76,7 @@ import DelModal from "@/components/Modals/DelModal.vue";
 import OrderModal from "@/components/Modals/OrderModal.vue";
 import PaginationPage from "@/components/Modals/PaginationPage.vue";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -100,9 +101,9 @@ export default {
           this.pagination = res.data.pagination;
           this.isLoading = false;
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "錯誤訊息");
+          Swal.fire(`${err}`);
         });
     },
     openModal(item) {
@@ -129,11 +130,11 @@ export default {
           const orderComponent = this.$refs.orderModal;
           orderComponent.hideModal();
           this.getOrders(this.currentPage);
-          console.log(res, "更新付款狀態");
+          Swal.fire(`${res.data.message}`);
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "錯誤訊息");
+          Swal.fire(`${err.data.message}`);
         });
     },
     delOrder() {
@@ -147,9 +148,9 @@ export default {
           delComponent.hideModal();
           this.getOrders(this.currentPage);
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "錯誤訊息");
+          Swal.fire(`${err.data.message}`);
         });
     },
     formattedDate(timestamp) {

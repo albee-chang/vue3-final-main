@@ -2,7 +2,11 @@
   <div>
     <VueLoading :active="isLoading" :z-index="1060"></VueLoading>
     <div class="text-end mt-4">
-      <button class="btn btn-primary" type="button" @click="openModal(true)">
+      <button
+        class="btn btn-primary"
+        type="button"
+        @click="() => openModal(true)"
+      >
         建立新的產品
       </button>
     </div>
@@ -23,7 +27,13 @@
         <tr v-for="item in products" :key="item.id">
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
-          <td><img :src="item.imageUrl" class="img-fluid w-100 " style="height: 70px"></td>
+          <td>
+            <img
+              :src="item.imageUrl"
+              class="img-fluid w-100"
+              style="height: 70px"
+            />
+          </td>
           <td></td>
           <td class="text-right">{{ item.origin_price }}</td>
           <td class="text-right fw-bold text-danger">{{ item.price }}</td>
@@ -36,14 +46,14 @@
               <button
                 class="btn btn-outline-primary btn-sm"
                 type="button"
-                @click="openModal('edit', item)"
+                @click="() => openModal('edit', item)"
               >
                 編輯
               </button>
               <button
                 class="btn btn-outline-danger btn-sm"
                 type="button"
-                @click="openModal('delete', item)"
+                @click="() => openModal('delete', item)"
               >
                 刪除
               </button>
@@ -57,7 +67,7 @@
     <ProductModal
       @update-product="updateProduct"
       :product="tempProduct"
-      :isNew="isNew"
+      :status="status"
       ref="productModal"
     />
     <!-- DelModal -->
@@ -70,6 +80,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import DelModal from "@/components/Modals/DelModal.vue";
 import Pagination from "@/components/Modals/PaginationPage.vue";
 import ProductModal from "@/components/Modals/ProductModal.vue";
@@ -81,11 +92,8 @@ export default {
       products: [],
       pagination: {},
       tempProduct: {},
-      isNew: false,
       isLoading: false,
-      status: {
-        fileUploading: false,
-      },
+      status: false, //預設的產品狀態，確認是編輯或新增所使用的
       modal: {
         editModal: "",
         delModal: "",
@@ -101,6 +109,7 @@ export default {
   methods: {
     //渲染所有產品至畫面上
     getData(page = 1) {
+      this.isLoading = true;
       //參數 page 預設值
       const url = `${VITE_APP_URL}/api/${VITE_APP_PATH}/admin/products/?page=${page}`;
       this.$http
@@ -112,30 +121,31 @@ export default {
           this.isLoading = false;
         })
         .catch((err) => {
-          alert(err.data.message);
+          Swal.fire(`${err.data.message}`);
         });
     },
     openModal(status, product) {
-      if (status === "new") {
+      if (status === true) {
         //建立新的產品
         this.tempProduct = {
           imagesUrl: [],
           id: new Date().getTime(),
         };
-        this.status = true;
-        //productModal.show(); //打開動態視窗
+        this.status = false;
+        const productComponent = this.$refs.productModal;
+        productComponent.openModal(); //打開動態視窗
       } else if (status === "edit") {
         //修改產品
         this.tempProduct = { ...product };
         this.status = false;
-        //productModal.show();
+        const productComponent = this.$refs.productModal;
+        productComponent.openModal(); //打開動態視窗
       } else if (status === "delete") {
         //刪除產品
         this.tempProduct = { ...product };
-        //delProductModal.show();
+        const delComponent = this.$refs.delModal;
+        delComponent.openModal();
       }
-      const productComponent = this.$refs.productModal;
-      productComponent.openModal();
     },
     updateProduct() {
       let url = `${VITE_APP_URL}/api/${VITE_APP_PATH}/admin/product`;
@@ -147,14 +157,15 @@ export default {
       }
 
       this.$http[http](url, { data: this.tempProduct })
-        .then((response) => {
-          alert(response.data.message);
-          //ProductModal.hide(); //隱藏動態視窗
+        .then((res) => {
+          Swal.fire(`${res.data.message}`);
+          const productComponent = this.$refs.productModal;
+          productComponent.hideModal();
           this.getData(); //重新取得資料
           this.tempProduct = {};
         })
         .catch((err) => {
-          alert(err.data.message);
+          Swal.fire(`${err.data.message}`);
         });
     },
     delProduct() {
@@ -162,15 +173,14 @@ export default {
 
       this.$http
         .delete(url)
-        .then((response) => {
-          alert(response.data.message);
-          //delProductModal.hide();
+        .then((res) => {
+          Swal.fire(`${res.data.message}`);
           const delComponent = this.$refs.delModal;
           delComponent.hideModal();
           this.getData(this.currentPage);
         })
         .catch((err) => {
-          alert(err.data.message);
+          Swal.fire(`${err.data.message}`);
         });
     },
     createImages() {

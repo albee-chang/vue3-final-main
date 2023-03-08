@@ -12,7 +12,7 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span v-if="isNew">新增產品</span>
+            <span v-if="status">新增產品</span>
             <span v-else>編輯產品</span>
           </h5>
           <button
@@ -71,7 +71,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-danger"
-                    @click="tempProduct.imagesUrl.splice(key, 1)"
+                    @click="() => tempProduct.imagesUrl.splice(key, 1)"
                   >
                     移除
                   </button>
@@ -84,7 +84,7 @@
                 >
                   <button
                     class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="tempProduct.imagesUrl.push('')"
+                    @click="() => tempProduct.imagesUrl.push('')"
                   >
                     新增圖片
                   </button>
@@ -201,7 +201,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            @click="$emit('update-product', tempProduct)"
+            @click="() => $emit('update-product', tempProduct)"
           >
             確認
           </button>
@@ -221,14 +221,13 @@ export default {
         return {};
       },
     },
-    isNew: {
+    status: {
       type: Boolean,
       default: false,
     },
   },
   data() {
     return {
-      status: {},
       modal: "",
       tempProduct: {},
     };
@@ -254,7 +253,6 @@ export default {
       const url = `${import.meta.env.VITE_API}/api/${
         import.meta.env.VITE_PATH
       }/admin/upload`;
-      this.status.fileUploading = true;
       this.$http
         .post(url, formData, {
           headers: {
@@ -262,7 +260,6 @@ export default {
           },
         })
         .then((response) => {
-          this.status.fileUploading = false;
           if (response.data.success) {
             this.tempProduct.imageUrl = response.data.imageUrl;
             this.$refs.fileInput.value = "";
@@ -281,7 +278,6 @@ export default {
           }
         })
         .catch((error) => {
-          this.status.fileUploading = false;
           console.log(error.response, "圖片失敗");
         });
     },
