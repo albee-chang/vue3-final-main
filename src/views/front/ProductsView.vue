@@ -21,6 +21,7 @@
             class="col-12 col-md-3 card mb-2 me-2"
             v-for="product in products"
             :key="product.id"
+            data-aos="fade-up"
           >
             <img
               :src="product.imageUrl"

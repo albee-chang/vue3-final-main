@@ -17,6 +17,7 @@
             src="https://images.unsplash.com/photo-1540380968028-950d9ea1507e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1889&q=80"
             alt="aboutImg"
             style="width: 1200px; height: 700px"
+            data-aos="fade-up"
           />
         </div>
       </div>

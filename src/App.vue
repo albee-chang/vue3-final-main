@@ -1,7 +1,7 @@
 <script>
 import { RouterView } from "vue-router";
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import AOS from "aos";
+import "aos/dist/aos.css";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 
 export default {

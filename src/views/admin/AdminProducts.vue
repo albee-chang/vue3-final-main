@@ -131,7 +131,7 @@ export default {
           imagesUrl: [],
           id: new Date().getTime(),
         };
-        this.status = false;
+        this.status = true;
         const productComponent = this.$refs.productModal;
         productComponent.openModal(); //打開動態視窗
       } else if (status === "edit") {
@@ -170,7 +170,6 @@ export default {
     },
     delProduct() {
       const url = `${VITE_APP_URL}/api/${VITE_APP_PATH}/admin/product/${this.tempProduct.id}`;
-
       this.$http
         .delete(url)
         .then((res) => {

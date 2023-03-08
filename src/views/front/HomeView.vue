@@ -4,9 +4,10 @@
       src="../../assets/pictures/banner-ok-1.jpg"
       class="d-block w-100"
       alt="banner"
+      data-aos="fade-up"
     />
     <!-- about -->
-    <div class="container-fluid bg-secondary" style="height: 20%">
+    <div class="container-fluid bg-light" style="height: 20%">
       <div class="row justify-content-md-center py-5 px-xl-5">
         <div class="col-md-6 col-12 py-5">
           <div class="text-center mb-2 pb-2">
@@ -39,6 +40,7 @@
           v-for="product in products"
           :key="product.id"
           id="products"
+          data-aos="fade-up"
         >
           <div
             class="d-flex flex-column border mb-3 p-3 product-item"
@@ -91,6 +93,7 @@
         class="card mb-3 position-relative"
         v-for="article in articles"
         :key="article.id"
+        data-aos="fade-up"
       >
         <div class="row g-0" v-if="article.isPublic">
           <div class="col-12">

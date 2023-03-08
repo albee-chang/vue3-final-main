@@ -9,6 +9,7 @@
       class="card mb-3 position-relative"
       v-for="article in articles"
       :key="article.id"
+      data-aos="fade-up"
     >
       <div class="row g-0" v-if="article.isPublic">
         <div class="col-md-8">

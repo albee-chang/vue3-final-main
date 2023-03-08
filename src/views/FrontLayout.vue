@@ -21,7 +21,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto fs-5 fw-bold">
           <li class="nav-item">
             <RouterLink to="/" class="nav-link">首頁</RouterLink>
           </li>
@@ -57,18 +57,22 @@
     <RouterView></RouterView>
   </div>
   <!-- Footer Start -->
-  <div class="container-fluid bg-secondary text-dark p-5">
-    <h4 class="font-weight-semi-bold">聯絡我們</h4>
+  <div class="container-fluid bg-light text-primary px-4 py-3 fw-bold">
+    <h4 class="mb-3 fw-bold">聯絡我們</h4>
     <p>
-      <i class="bi bi-map text-primary mr-3 fs-5"></i> 客服時間 : 週一至週五
-      9:00-18:00
+      <i class="bi bi-chevron-right text-primary me-2 fs-6"></i> 客服時間 :
+      週一至週五 9:00-18:00
     </p>
     <p>
-      <i class="bi bi-envelope text-primary mr-3 fs-5"></i>
+      <i class="bi bi-chevron-right text-primary me-2 fs-6"></i>
       greenplant@gmail.com
     </p>
-    <p><i class="bi bi-phone text-primary mr-3 fs-5"></i> (02) 8899-8899</p>
-    <h5>歡迎來信，我們將盡快與您聯繫 !</h5>
+    <p>
+      <i class="bi bi-chevron-right text-primary me-2 fs-6"></i> (02) 8899-8899
+    </p>
+    <p class="bi bi-chevron-right me-2 fs-6 fw-bold">
+      歡迎來信，我們將盡快與您聯繫 !
+    </p>
   </div>
   <!-- Footer End -->
 </template>
