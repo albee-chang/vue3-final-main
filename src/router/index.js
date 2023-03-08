@@ -51,12 +51,12 @@ const router = createRouter({
       component: () => import("../views/DashboardView.vue"),
       children: [
         {
-          path: "orders",
-          component: () => import("../views/admin/AdminOrders.vue"),
-        },
-        {
           path: "products",
           component: () => import("../views/admin/AdminProducts.vue"),
+        },
+        {
+          path: "orders",
+          component: () => import("../views/admin/AdminOrders.vue"),
         },
 
         {

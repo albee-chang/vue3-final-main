@@ -56,15 +56,7 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{ formattedDate(tempOrder.create_at) }}</td>
-                  </tr>
-                  <tr>
-                    <th>付款時間</th>
-                    <td>
-                      <span>
-                        {{ formattedDate(tempOrder.create_at) }}
-                      </span>
-                    </td>
+                    <td>{{ DateTimeFormat }}</td>
                   </tr>
                   <tr>
                     <th>付款狀態</th>
@@ -156,8 +148,11 @@ export default {
       modal: "",
       tempOrder: {},
       isPaid: false,
+      DateTimeFormat: "",
     };
   },
+  emits: ["update-paid"],
+  mixins: [modalMixin],
   methods: {
     formattedDate(timestamp) {
       const date = new Date(timestamp * 1000); // 將秒數轉換為毫秒數
@@ -169,11 +164,11 @@ export default {
       return new Intl.DateTimeFormat("zh-TW", options).format(date);
     },
   },
-  emits: ["update-paid"],
-  mixins: [modalMixin],
   watch: {
     order() {
       this.tempOrder = this.order;
+      this.DateTimeFormat = this.formattedDate(this.tempOrder.create_at);
+
     },
   },
 };

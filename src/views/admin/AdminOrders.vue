@@ -150,7 +150,7 @@ export default {
         })
         .catch((err) => {
           this.isLoading = false;
-          Swal.fire(`${err.data.message}`);
+          Swal.fire(`${err}`);
         });
     },
     formattedDate(timestamp) {
