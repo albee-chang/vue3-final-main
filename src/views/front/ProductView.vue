@@ -1,10 +1,15 @@
 <template>
   <div>單一產品頁面</div>
   <div class="card" height="300px">
-    <h2 class="card-title mt-2">
+    <h2 class="card-title my-3 text-primary fw-bold">
       {{ product.title }}
     </h2>
-    <img class="card-img-top" :src="product.imageUrl" alt="" />
+    <img
+      class="card-img-top"
+      :src="product.imageUrl"
+      style="width: 50vw"
+      alt=""
+    />
     <div class="card-body">
       <h5 class="card-title fw-bold">{{ product.title }}</h5>
       <p class="card-text">{{ product.description }}</p>
@@ -13,7 +18,7 @@
       <a
         href="#"
         class="btn btn-primary"
-        @click.prevent="addToCart(product.id)"
+        @click.prevent="() => addToCart(product.id)"
       >
         加入購物車
       </a>

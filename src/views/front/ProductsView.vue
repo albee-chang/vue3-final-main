@@ -39,7 +39,7 @@
               <a
                 href="#"
                 class="btn btn-outline-primary w-100 mb-1"
-                @click.prevent="addToCart(product.id)"
+                @click.prevent="() => addToCart(product.id)"
                 ><i class="bi bi-cart-check fs-5"></i> 加入購物車</a
               >
               <button class="btn btn-success w-100">
@@ -86,14 +86,13 @@ export default {
           Swal.fire(`${res.data.message}!`);
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire(`${err.data.message}`);
         });
     },
     getCartList() {
       this.$http
         .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
-          // console.log("購物車列表: ", res.data.data);
           this.cart = res.data.data;
         });
     },
@@ -104,6 +103,9 @@ export default {
       .then((res) => {
         this.products = res.data.products;
         this.getCartList();
+      })
+      .catch((err) => {
+        Swal.fire(`${err.data.message}`);
       });
   },
 };

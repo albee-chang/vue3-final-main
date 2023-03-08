@@ -70,7 +70,7 @@
             </div>
             <button
               class="btn btn-outline-primary add-to-cart-button"
-              @click="addToCart"
+              @click.prevent="() => addToCart(product.id)"
             >
               加入購物車
             </button>
@@ -133,50 +133,30 @@
   </div>
 </template>
 <script>
-// import { RouterLink } from "vue-router";
+import { mapActions, mapState } from "pinia";
+import cartStore from "../../stores/cart";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
-
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
       products: [],
-      cart: {},
       isHovering: false,
       articles: [],
     };
   },
-  components: {
-    // RouterLink,
+  computed: {
+    ...mapState(cartStore, ["carts"]), //購物車列表
   },
   methods: {
-    addToCart(product_id, qty = 1) {
-      const data = {
-        product_id,
-        qty,
-      };
-      this.$http
-        .post(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          alert(res.data.message);
-          this.getCartList();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getCartList() {
-      this.$http
-        .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cart = res.data.data;
-        });
-    },
     getProductList() {
       this.$http
         .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
           this.products = res.data.products;
-          console.log(res);
+        })
+        .catch((err) => {
+          Swal.fire(`${err.data.message}`);
         });
     },
     getArticles(page = 1) {
@@ -186,13 +166,14 @@ export default {
         .then((res) => {
           this.articles = res.data.articles;
         })
-        .catch((error) => {
-          console.log(error.response, "錯誤訊息");
+        .catch((err) => {
+          Swal.fire(`${err.data.message}`);
         });
     },
+    ...mapActions(cartStore, ["getCartList"]),
+    ...mapActions(cartStore, ["addToCart"]),
   },
   mounted() {
-    this.getCartList();
     this.getProductList();
     this.getArticles();
   },

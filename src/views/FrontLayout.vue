@@ -44,14 +44,8 @@
           <RouterLink to="/cart">
             <i class="bi bi-cart4 position-relative">
               <span
-                v-if="cart.carts"
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6"
-                >{{ cart.carts.length }}
-              </span>
-              <span
-                v-else
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6"
-                >0
+                >{{ carts.length }}
               </span>
             </i>
           </RouterLink>
@@ -93,23 +87,18 @@ a:hover {
 </style>
 <script>
 import { RouterLink, RouterView } from "vue-router";
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+import { mapActions, mapState } from "pinia";
+import cartStore from "../stores/cart";
 export default {
   data() {
-    return {
-      cart: {},
-    };
+    return {};
   },
   components: [RouterLink, RouterView],
+  computed: {
+    ...mapState(cartStore, ["carts"]), //購物車列表
+  },
   methods: {
-    getCartList() {
-      this.$http
-        .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
-        .then((res) => {
-          console.log("購物車列表: ", res.data.data);
-          this.cart = res.data.data;
-        });
-    },
+    ...mapActions(cartStore, ["getCartList"]),
   },
   mounted() {
     this.getCartList();

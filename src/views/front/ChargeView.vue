@@ -17,13 +17,15 @@
           type="button"
           class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
           style="width: 6rem; height: 2rem"
-        >商品確認
+        >
+          商品確認
         </button>
         <button
           type="button"
           class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
           style="width: 6rem; height: 2rem"
-        >表單填寫
+        >
+          表單填寫
         </button>
         <button
           type="button"
@@ -32,7 +34,6 @@
         >
           訂購完成
         </button>
-
       </div>
     </div>
     <VueForm
@@ -119,7 +120,8 @@
 </template>
 <script>
 import Swal from "sweetalert2";
-
+import { mapActions, mapState } from "pinia";
+import cartStore from "../../stores/cart";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 export default {
   data() {
@@ -145,11 +147,19 @@ export default {
         .then((res) => {
           Swal.fire(`${res.data.message}`);
           this.$refs.form.resetForm();
+          this.$router.push("/");
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire(`${err.data.message}`);
         });
     },
+    ...mapActions(cartStore, ["getCartList"]),
+  },
+  computed: {
+    ...mapState(cartStore, ["carts"]), //購物車列表
+  },
+  mounted() {
+    this.getCartList();
   },
 };
 </script>

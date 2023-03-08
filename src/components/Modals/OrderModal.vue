@@ -168,7 +168,6 @@ export default {
     order() {
       this.tempOrder = this.order;
       this.DateTimeFormat = this.formattedDate(this.tempOrder.create_at);
-
     },
   },
 };

@@ -103,7 +103,7 @@ export default {
         })
         .catch((err) => {
           this.isLoading = false;
-          Swal.fire(`${err}`);
+          Swal.fire(`${err.data.message}`);
         });
     },
     openModal(item) {
