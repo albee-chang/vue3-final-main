@@ -77,6 +77,7 @@ import OrderModal from "@/components/Modals/OrderModal.vue";
 import PaginationPage from "@/components/Modals/PaginationPage.vue";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 import Swal from "sweetalert2";
+
 export default {
   data() {
     return {

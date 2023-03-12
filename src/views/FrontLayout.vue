@@ -3,12 +3,14 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid">
-      <img
-        src="../assets/pictures/綠植工作坊logo.png"
-        alt=""
-        width="140"
-        height="55"
-      />
+      <a href="#">
+        <img
+          src="../assets/pictures/綠植工作坊logo.png"
+          alt=""
+          width="140"
+          height="55"
+        />
+      </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -79,14 +81,6 @@
 <style>
 i {
   font-size: 1.9rem;
-}
-a {
-  color: primary;
-  border-bottom: 2px solid transparent;
-}
-a:hover {
-  border-bottom: 2px solid rgb(98, 145, 132);
-  transition-delay: 0.2s;
 }
 </style>
 <script>

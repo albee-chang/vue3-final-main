@@ -56,7 +56,7 @@
       <div id="content">
         <div class="container-fluid">
           <div class="container" v-if="this.status == true">
-            <RouterView></RouterView>
+            <RouterView />
           </div>
         </div>
       </div>

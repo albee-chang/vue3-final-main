@@ -109,7 +109,6 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
-          console.log("購物車列表: ", res.data.data);
           this.cart = res.data.data;
         });
     },
@@ -123,8 +122,7 @@ export default {
         .put(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`, {
           data,
         })
-        .then((res) => {
-          console.log("更新購物車: ", res.data);
+        .then(() => {
           this.getCartList();
           this.loadingItem = "";
         });
@@ -133,8 +131,7 @@ export default {
       this.loadingItem = item.id;
       this.$http
         .delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart/${item.id}`)
-        .then((res) => {
-          console.log("刪除單一品項: ", res.data);
+        .then(() => {
           this.getCartList();
           this.loadingItem = "";
         });
@@ -142,8 +139,7 @@ export default {
     deleteAllCart() {
       this.$http
         .delete(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/carts`)
-        .then((res) => {
-          console.log("刪除單一品項: ", res.data);
+        .then(() => {
           this.getCartList();
         });
     },

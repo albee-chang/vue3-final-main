@@ -61,7 +61,9 @@
 <script>
 import ArticleModal from "@/components/Modals/ArticleModal.vue";
 import DelModal from "@/components/Modals/DelModal.vue";
+import Swal from "sweetalert2";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
+
 export default {
   data() {
     return {
@@ -90,9 +92,9 @@ export default {
             this.pagination = response.data.pagination;
           }
         })
-        .catch((error) => {
-          console.log("error", error.response);
+        .catch((err) => {
           this.isLoading = false;
+          Swal.fire(`${err.data.message}`);
         });
     },
     getArticle(id) {
@@ -107,14 +109,14 @@ export default {
             this.isNew = false;
           }
         })
-        .catch((error) => {
-          console.log("error", error.response, error.request, error.message);
+        .catch((err) => {
           this.isLoading = false;
           this.emitter.emit("push-message", {
             title: "連線錯誤",
             style: "danger",
-            content: error.message,
+            content: err.message,
           });
+          Swal.fire(`${err.response}`);
         });
     },
     openModal(isNew, item) {
@@ -146,13 +148,13 @@ export default {
       this.$http[httpMethod](api, { data: this.tempArticle })
         .then((response) => {
           this.isLoading = false;
-          console.log(response, status);
+          Swal.fire(`${response},${status}`);
           articleComponent.hideModal();
           this.getArticles(this.currentPage);
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "錯誤訊息");
+          Swal.fire(`${err.response}`);
         });
     },
     openDelArticleModal(item) {
@@ -167,14 +169,14 @@ export default {
         .delete(url)
         .then((response) => {
           this.isLoading = false;
-          console.log(response, "刪除貼文");
+          Swal.fire(`${response}`);
           const delComponent = this.$refs.delModal;
           delComponent.hideModal();
           this.getArticles(this.currentPage);
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "刪除貼文");
+          Swal.fire(`${err.response}`);
         });
     },
     formattedDate(timestamp) {

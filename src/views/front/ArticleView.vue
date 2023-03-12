@@ -20,7 +20,11 @@
           -
           <small class="text-muted">作者：{{ article.author }}</small>
         </p>
-        <img :src="article.imageUrl" alt="" class="img-fluid mb-3" />
+        <img
+          :src="article.imageUrl"
+          alt="articleImageUrl"
+          class="img-fluid mb-3"
+        />
         <div v-html="article.content"></div>
       </article>
     </div>
@@ -29,6 +33,7 @@
 
 <script>
 import { RouterLink } from "vue-router";
+import Swal from "sweetalert2";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 export default {
   data() {
@@ -49,9 +54,9 @@ export default {
           this.article = res.data.article;
           this.isLoading = false;
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "錯誤訊息");
+          Swal.fire(`${err.data.message}`);
         });
     },
     formattedDate(timestamp) {
