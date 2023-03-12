@@ -26,7 +26,7 @@
             <img
               :src="product.imageUrl"
               class="card-img-top productImg"
-              alt="product.title"
+              alt="productTitle"
             />
             <div class="card-body">
               <h6 class="card-title">
@@ -43,7 +43,7 @@
                 @click.prevent="() => addToCart(product.id)"
                 ><i class="bi bi-cart-check fs-5"></i> 加入購物車</a
               >
-              <button class="btn btn-success w-100">
+              <button class="btn btn-success w-100" type="button">
                 <RouterLink
                   :to="`/product/${product.id}`"
                   class="text-white text-decoration-none"

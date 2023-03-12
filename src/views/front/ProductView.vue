@@ -8,7 +8,7 @@
       class="card-img-top"
       :src="product.imageUrl"
       style="width: 50vw"
-      alt=""
+      alt="productImage"
     />
     <div class="card-body">
       <h5 class="card-title fw-bold">{{ product.title }}</h5>
@@ -47,14 +47,13 @@ export default {
           Swal.fire(`${res.data.message}!`);
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire(`${err.message}!`);
         });
     },
     getCartList() {
       this.$http
         .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
-          // console.log("購物車列表: ", res.data.data);
           this.cart = res.data.data;
         });
     },
@@ -66,10 +65,9 @@ export default {
       .get(url)
       .then((res) => {
         this.product = res.data.product;
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire(`${err.message}!`);
       });
   },
 };

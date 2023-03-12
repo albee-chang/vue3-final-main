@@ -96,14 +96,14 @@
         data-aos="fade-up"
       >
         <div class="row g-0" v-if="article.isPublic">
-          <div class="col-12">
+          <div class="col-12 col-md-8">
             <img
               :src="article.imageUrl"
               class="img-fluid w-100 rounded-start article-image"
               alt="article"
             />
           </div>
-          <div class="col-12">
+          <div class="col-12 col-md-4">
             <div class="card-body">
               <h5 class="card-title fw-bold text-primary fs-3">
                 <i class="bi bi-tree-fill"></i>
@@ -116,7 +116,7 @@
               <RouterLink
                 :to="`/news/${article.id}`"
                 v-if="article.isPublic"
-                class="btn btn-outline-primary position-absolute bottom-0 end-0 m-4"
+                class="btn btn-outline-primary m-4 ms-auto text-nowrap"
               >
                 繼續閱讀
               </RouterLink>
@@ -187,15 +187,6 @@ export default {
 i {
   margin-top: 2rem;
 }
-.product-item {
-  position: relative;
-}
-
-.add-to-cart-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
 .product-image {
   position: relative;
 }
@@ -211,6 +202,13 @@ i {
 
 .article-image {
   object-fit: cover;
-  height: 500px;
+  height: 100%;
+}
+
+@media screen and (min-width: 450px) {
+  .article-image {
+    object-fit: cover;
+    height: 400px;
+  }
 }
 </style>

@@ -25,9 +25,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto fs-5 fw-bold">
           <li class="nav-item">
-            <RouterLink to="/" class="nav-link">首頁</RouterLink>
-          </li>
-          <li class="nav-item">
             <RouterLink to="/products" class="nav-link">網路商城</RouterLink>
           </li>
           <li class="nav-item dropdown">
@@ -56,7 +53,7 @@
     </div>
   </nav>
   <div>
-    <RouterView></RouterView>
+    <RouterView />
   </div>
   <!-- Footer Start -->
   <div class="container-fluid bg-light text-primary px-4 py-3 fw-bold">

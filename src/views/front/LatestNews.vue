@@ -40,6 +40,7 @@
 
 <script>
 import { RouterLink } from "vue-router";
+import Swal from "sweetalert2";
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env;
 export default {
   data() {
@@ -62,9 +63,9 @@ export default {
           this.pagination = res.data.pagination;
           this.isLoading = false;
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
-          console.log(error.response, "錯誤訊息");
+          Swal.fire(`${err.response}`);
         });
     },
   },
