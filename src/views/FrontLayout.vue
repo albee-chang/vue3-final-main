@@ -6,7 +6,7 @@
       <a href="#">
         <img
           src="../assets/pictures/綠植工作坊logo.png"
-          alt=""
+          alt="logo"
           width="140"
           height="55"
         />
