@@ -18,21 +18,21 @@
           class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
           style="width: 2.5rem; height: 2.5rem"
         >
-        <i class="bi bi-bag-check-fill fs-5"></i>
+          <i class="bi bi-bag-check-fill fs-5"></i>
         </button>
         <button
           type="button"
           class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
           style="width: 2.5rem; height: 2.5rem"
         >
-        <i class="bi bi-card-checklist fs-5"></i>
+          <i class="bi bi-card-checklist fs-5"></i>
         </button>
         <button
           type="button"
           class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
           style="width: 2.5rem; height: 2.5rem"
         >
-        <i class="bi bi-box2-heart-fill fs-5"></i>
+          <i class="bi bi-box2-heart-fill fs-5"></i>
         </button>
       </div>
     </div>
