@@ -94,60 +94,85 @@
             <div class="col-sm-8">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
-                <input
+                <VueField
                   type="text"
+                  name="標題"
                   class="form-control"
                   id="title"
                   v-model="tempProduct.title"
                   placeholder="請輸入標題"
-                />
+                ></VueField>
+                <error-message
+                  name="標題"
+                  class="invalid-feedback"
+                ></error-message>
               </div>
 
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
                   <label for="category" class="form-label">分類</label>
-                  <input
+                  <VueField
                     type="text"
+                    name="分類"
                     class="form-control"
                     id="category"
                     v-model="tempProduct.category"
                     placeholder="請輸入分類"
-                  />
+                  ></VueField>
+                  <error-message
+                    name="分類"
+                    class="invalid-feedback"
+                  ></error-message>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">單位</label>
-                  <input
+                  <VueField
                     type="text"
+                    name="單位"
                     class="form-control"
                     id="unit"
                     v-model="tempProduct.unit"
                     placeholder="請輸入單位"
-                  />
+                  ></VueField>
+                  <error-message
+                    name="單位"
+                    class="invalid-feedback"
+                  ></error-message>
                 </div>
               </div>
 
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
                   <label for="origin_price" class="form-label">原價</label>
-                  <input
+                  <VueField
                     type="number"
+                    name="原價"
                     class="form-control"
                     id="origin_price"
                     min="0"
                     v-model.number="tempProduct.origin_price"
                     placeholder="請輸入原價"
-                  />
+                  ></VueField>
+                  <error-message
+                    name="原價"
+                    class="invalid-feedback"
+                  ></error-message>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">售價</label>
-                  <input
+                  <VueField
                     type="number"
+                    name="售價"
                     class="form-control"
                     id="price"
                     v-model.number="tempProduct.price"
                     min="0"
                     placeholder="請輸入售價"
-                  />
+                  ></VueField>
+                  <error-message
+                    name="售價"
+                    class="invalid-feedback"
+                  ></error-message>
                 </div>
               </div>
               <hr />
@@ -199,7 +224,7 @@
             取消
           </button>
           <button
-            type="button"
+            type="submit"
             class="btn btn-primary"
             @click="() => $emit('update-product', tempProduct)"
           >
@@ -212,7 +237,7 @@
 </template>
 <script>
 import modalMixin from "@/mixins/modalMixin";
-
+import Swal from "sweetalert2";
 export default {
   props: {
     product: {
@@ -277,8 +302,8 @@ export default {
             });
           }
         })
-        .catch((error) => {
-          console.log(error.response, "圖片失敗");
+        .catch((err) => {
+          Swal.fire(`${err.data.message}`);
         });
     },
   },

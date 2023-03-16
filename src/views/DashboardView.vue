@@ -1,12 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid">
-      <img
-        src="../assets/pictures/綠植工作坊logo.png"
-        alt=""
-        width="140"
-        height="55"
-      />
+      <a href="#">
+        <img
+          src="../assets/pictures/綠植工作坊logo.png"
+          alt="logo"
+          width="140"
+          height="55"
+        />
+      </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -35,9 +37,6 @@
             <RouterLink to="/admin/articles" class="nav-link"
               >文章管理</RouterLink
             >
-          </li>
-          <li class="nav-item">
-            <RouterLink to="/" class="nav-link">回到前台首頁</RouterLink>
           </li>
         </ul>
         <button

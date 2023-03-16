@@ -1,4 +1,4 @@
-<template>
+<template class="h-100">
   <VueLoading :active="isLoading" :z-index="1060"></VueLoading>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -20,9 +20,9 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon" @click="() => navToggle()"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto fs-5 fw-bold">
           <li class="nav-item">
             <RouterLink to="/products" class="nav-link">網路商城</RouterLink>
@@ -52,11 +52,11 @@
       </div>
     </div>
   </nav>
-  <div>
+  <div class="min-h">
     <RouterView />
   </div>
   <!-- Footer Start -->
-  <div class="container-fluid bg-light text-primary px-4 py-3 fw-bold">
+  <div class="container-fluid bg-light text-primary px-4 py-3 fw-bold footer">
     <h4 class="mb-3 fw-bold">聯絡我們</h4>
     <p>
       <i class="bi bi-chevron-right text-primary me-2 fs-6"></i> 客服時間 :
@@ -84,6 +84,8 @@ i {
 import { RouterLink, RouterView } from "vue-router";
 import { mapActions, mapState } from "pinia";
 import cartStore from "../stores/cart";
+import Collapse from "bootstrap/js/dist/collapse.js";
+let navCollapse = "";
 export default {
   data() {
     return {};
@@ -94,9 +96,32 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ["getCartList"]),
+    navToggle() {
+      navCollapse.toggle();
+    },
   },
   mounted() {
     this.getCartList();
+    navCollapse = new Collapse(document.querySelector("#navCollapse"), {
+      toggle: false,
+    });
   },
 };
 </script>
+
+<style>
+.min-h {
+  min-height: calc(100vh - 82px);
+}
+.footer {
+  background-image: url("/src/assets/pictures/footer.jpg");
+  background-position: right center;
+  background-size: cover;
+}
+@media screen and (max-width: 450px) {
+  .footer {
+    background-image: none;
+    background-color: black;
+  }
+}
+</style>

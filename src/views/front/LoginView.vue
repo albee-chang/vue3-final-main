@@ -57,7 +57,7 @@ export default {
           const { token, expired } = res.data;
           document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
           Swal.fire(`${res.data.message}`);
-          this.$router.push("/admin");
+          this.$router.push("/admin/products");
         })
         .catch((err) => {
           Swal.fire(`${err.response.data.message}`);

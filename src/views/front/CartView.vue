@@ -6,7 +6,7 @@
     <button
       class="btn btn-outline-danger"
       type="button"
-      @click="deleteAllCart()"
+      @click="()=> deleteAllCart()"
     >
       清空購物車
     </button>

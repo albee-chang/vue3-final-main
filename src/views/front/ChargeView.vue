@@ -77,7 +77,7 @@
         <VueField
           id="tel"
           name="電話"
-          type="text"
+          type="tel"
           class="form-control"
           :class="{ 'is-invalid': errors['電話'] }"
           placeholder="請輸入電話"
