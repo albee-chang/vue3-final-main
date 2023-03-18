@@ -23,7 +23,7 @@
         <span class="navbar-toggler-icon" @click="() => navToggle()"></span>
       </button>
       <div class="collapse navbar-collapse" id="navCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto fs-5 fw-bold">
+        <ul class="navbar-nav mb-2 mb-lg-0 mx-auto fs-5 fw-bold">
           <li class="nav-item">
             <RouterLink to="/products" class="nav-link">網路商城</RouterLink>
           </li>
