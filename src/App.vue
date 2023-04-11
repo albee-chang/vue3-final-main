@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <div class="container-fluid">
+  <div>
     <RouterView />
   </div>
 </template>

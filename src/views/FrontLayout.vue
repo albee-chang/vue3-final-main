@@ -1,6 +1,6 @@
 <template class="h-100">
   <VueLoading :active="isLoading" :z-index="1060"></VueLoading>
-  <!-- Navbar -->
+  <!-- Navbar Start -->
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid">
       <a href="#">
@@ -39,7 +39,7 @@
             <i class="bi bi-person-fill"></i>
           </RouterLink>
         </button>
-        <button type="button" class="btn">
+        <button type="button" class="btn" v-if="carts.length !== 0">
           <RouterLink to="/cart">
             <i class="bi bi-cart4 position-relative">
               <span
@@ -49,12 +49,18 @@
             </i>
           </RouterLink>
         </button>
+        <button type="button" class="btn" v-else>
+          <i class="bi bi-cart4 text-secondary position-relative disabled"></i>
+        </button>
       </div>
     </div>
   </nav>
-  <div class="min-h">
+    <!-- Navbar End -->
+  <!-- Content Wrapper -->
+  <div class="min-h mx-5">
     <RouterView />
   </div>
+  <!-- Content Wrapper End -->
   <!-- Footer Start -->
   <div class="container-fluid bg-light text-primary px-4 py-3 fw-bold footer">
     <h4 class="mb-3 fw-bold">聯絡我們</h4>

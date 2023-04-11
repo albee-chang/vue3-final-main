@@ -1,6 +1,6 @@
 <template>
   <VueLoading :active="isLoading" :z-index="1060"></VueLoading>
-  <div class="row">
+  <div class="row mt-4">
     <!-- Sidebar -->
     <ul class="col-2 navbar-nav p-3 mb-2 d-none d-lg-block">
       <li>
@@ -31,13 +31,13 @@
     <div class="col-10 d-flex flex-column mt-2">
       <!-- Page Heading -->
       <div class="container">
-        <div class="row g-0">
+        <div class="row g-0 d-flex justify-content-center">
           <h5 class="fw-bold text-primary mt-2">
             {{ this.title }}
             <i class="bi bi-arrow-down-right-square-fill fs-5"></i>
           </h5>
           <div
-            class="col-12 col-md-3 card mb-2 me-2"
+            class="col-12 col-lg-2 col-md-3 card mb-2 me-2 "
             v-for="product in products"
             :key="product.id"
             data-aos="fade-up"
@@ -75,9 +75,9 @@
           </div>
         </div>
       </div>
+      <Pagination class="my-3" :pages="pagination" @emit-pages="getProducts"></Pagination>
     </div>
   </div>
-  <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
 </template>
 <script>
 import Swal from "sweetalert2";
@@ -167,5 +167,8 @@ export default {
 .productImg {
   object-fit: cover;
   height: 250px;
+}
+.card-body {
+  flex: 1 1;
 }
 </style>

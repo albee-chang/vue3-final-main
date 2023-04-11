@@ -1,41 +1,44 @@
 <template>
-  <div class="container mt-5">
-    <div class="text-center mb-4">
-      <h4 class="section-title px-5">
-        <span class="px-2">最新消息 / 文章</span>
-      </h4>
-    </div>
-    <div
-      class="card mb-3 position-relative"
-      v-for="article in articles"
-      :key="article.id"
-      data-aos="fade-up"
-    >
-      <div class="row g-0" v-if="article.isPublic">
-        <div class="col-md-8">
-          <img
-            :src="article.imageUrl"
-            class="img-fluid rounded-start"
-            alt="article"
-            style="height: 400px; width: 1200px"
-          />
-        </div>
-        <div class="col-md-4">
-          <div class="card-body">
-            <h5 class="card-title">{{ article.title }}</h5>
-            <div class="card-text" v-html="article.description"></div>
-            <RouterLink
-              :to="`/news/${article.id}`"
-              v-if="article.isPublic"
-              class="btn btn-outline-primary position-absolute bottom-0 end-0 m-4"
-            >
-              繼續閱讀
-            </RouterLink>
+  <div class="container-fluid pt-5 mx-5">
+      <div class="text-center mb-4">
+        <h2 class="section-title px-5">
+          <span class="px-2">最新消息</span>
+        </h2>
+      </div>
+      <div class="row g-0 px-xl-5 articlesList">
+        <div
+          class="card mb-3 col-6 col-md-4  mx-2"
+          v-for="article in articles"
+          :key="article.id"
+          data-aos="fade-up"
+        >
+          <div v-if="article.isPublic">
+            <img
+              :src="article.imageUrl"
+              class="img-fluid w-100 rounded-start article-image"
+              alt="article"
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary fs-3">
+                <i class="bi bi-tree-fill"></i>
+                {{ article.title }}
+              </h5>
+              <div class="card-text">
+                <i class="bi bi-caret-right-fill fs-6"></i
+                >{{ article.description }}
+              </div>
+              <RouterLink
+                :to="`/news/${article.id}`"
+                v-if="article.isPublic"
+                class="btn btn-outline-primary mt-3 text-nowrap justify-content-end"
+              >
+                繼續閱讀
+              </RouterLink>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -74,3 +77,15 @@ export default {
   },
 };
 </script>
+<style>
+ .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.articlesList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+</style>

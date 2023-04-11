@@ -12,13 +12,12 @@
             在這裡，初學者也能安心選購，我們有知識豐富的專員為您解說，<br />
             協助您挑選最適合您照護的植物，以及教導您養植技巧。
           </p>
-          <img
-            class="img-fluid my-5"
-            src="https://images.unsplash.com/photo-1540380968028-950d9ea1507e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1889&q=80"
-            alt="aboutImg"
-            style="width: 1200px; height: 700px"
-            data-aos="fade-up"
-          />
+          <div class="shopInfo border">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.256472923131!2d121.45737058742485!3d25.02536884251212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468183353914e23%3A0x24eda50ef4099ef0!2z5paw5YyX5biC5p2_5qmL5ZyL5rCR6YGL5YuV5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1681219640451!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="shopContent">
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -32,5 +31,9 @@ export default {};
 <style>
 img {
   object-fit: cover;
+}
+.shopInfo {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
