@@ -168,4 +168,7 @@ export default {
   object-fit: cover;
   height: 250px;
 }
+.card-body {
+  flex: 1 1 ; // 拿掉 auto
+}
 </style>
