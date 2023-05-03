@@ -73,7 +73,7 @@
               class="btn btn-primary add-to-cart-button"
               @click.prevent="() => addToCart(product.id)"
             >
-            <i class="bi bi-cart-check fs-5"></i> 加入購物車
+              <i class="bi bi-cart-check fs-5"></i> 加入購物車
             </button>
           </div>
         </div>
@@ -90,33 +90,52 @@
       </div>
       <div class="row g-0 px-xl-5 pb-3">
         <div
-          class="card col-12 col-md-4 mb-3 mx-3"
+          class="example-2 card mb-5"
           v-for="article in articles"
           :key="article.id"
-          data-aos="fade-up"
         >
-          <div v-if="article.isPublic">
-            <img
-              :src="article.imageUrl"
-              class="img-fluid w-100 rounded-start article-image"
-              alt="article"
-            />
-            <div class="card-body">
-              <h5 class="card-title fw-bold text-primary fs-3">
-                <i class="bi bi-tree-fill"></i>
-                {{ article.title }}
-              </h5>
-              <div class="card-text">
-                <i class="bi bi-caret-right-fill fs-6"></i
-                >{{ article.description }}
+          <div
+            class="wrapper"
+            :style="{
+              backgroundImage: 'url(' + article.imageUrl + ')',
+            }"
+            style="width: 100%; height: 100%; background-size: cover"
+          >
+            <div class="header">
+              <div class="date">
+                <span class="day">12</span>
+                <span class="month">Aug</span>
+                <span class="year">2023</span>
               </div>
-              <RouterLink
-                :to="`/news/${article.id}`"
-                v-if="article.isPublic"
-                class="btn btn-outline-primary m-4 ms-auto text-nowrap"
-              >
-                繼續閱讀
-              </RouterLink>
+              <ul class="menu-content">
+                <li>
+                  <a href="#" class="fa fa-bookmark-o"></a>
+                </li>
+                <li>
+                  <a href="#" class="fa fa-heart-o"><span>18</span></a>
+                </li>
+                <li>
+                  <a href="#" class="fa fa-comment-o"><span>3</span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="data">
+              <div class="content">
+                <span class="author">GREEN HOUSE</span>
+                <h1 class="title">
+                  <a href="#">{{ article.title }}</a>
+                </h1>
+                <p class="text">
+                  {{ article.description }}
+                </p>
+                <RouterLink
+                  :to="`/news/${article.id}`"
+                  v-if="article.isPublic"
+                  class="btn btn-outline-primary m-4 ms-auto text-nowrap"
+                >
+                  繼續閱讀
+                </RouterLink>
+              </div>
             </div>
           </div>
         </div>
@@ -181,12 +200,6 @@ export default {
 </script>
 
 <style>
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
 .bannerImg {
   max-height: 800px;
   object-fit: cover;

@@ -120,6 +120,8 @@ export default {
         .get(`${VITE_APP_URL}/v2/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
           this.cart = res.data.data;
+        }).catch((err) => {
+          Swal.fire(`${err.data.message}`);
         });
     },
     toCurrency(num) {
@@ -159,6 +161,7 @@ export default {
   },
   mounted() {
     this.getProducts();
+    this.getCartList();
   },
 };
 </script>

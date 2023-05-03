@@ -1,27 +1,33 @@
 <template>
-  <div>單一產品頁面</div>
-  <div class="card" height="300px">
-    <h2 class="card-title my-3 text-primary fw-bold">
-      {{ product.title }}
-    </h2>
-    <img
-      class="card-img-top"
-      :src="product.imageUrl"
-      style="width: 50vw"
-      alt="productImage"
-    />
-    <div class="card-body">
-      <h5 class="card-title fw-bold">{{ product.title }}</h5>
-      <p class="card-text">{{ product.description }}</p>
-      <hr />
-      <p class="card-text">{{ product.content }}</p>
-      <a
-        href="#"
-        class="btn btn-primary"
-        @click.prevent="() => addToCart(product.id)"
-      >
-        加入購物車
-      </a>
+  <div class="mx-5 my-5 text-primary">
+    <i class="bi bi-arrow-right-circle-fill fs-6"></i> 單一產品頁面
+  </div>
+  <div class="wrapper">
+    <div>
+      <img class="productImage" :src="product.imageUrl" alt="productImage" />
+    </div>
+    <div class="productInfo mx-5">
+      <h2 class="card-title mb-5 text-primary fw-bold">
+        {{ product.title }}
+      </h2>
+      <div class="card-body">
+        <h5 class="card-title fw-bold"><span class="text-primary fw-bold border mx-3"> 產品名稱: </span>{{ product.title }}</h5>
+        <br>
+        <div class="card-text"><span class="text-primary fw-bold border mx-3"> 產品敘述: </span>{{ product.description }}</div>
+        <hr />
+      <div class="card-text"><span class="text-primary fw-bold border mx-3"> 產品細節 </span>{{ product.content }}</div>
+        
+      </div>
+
+      <div>
+        <a
+          href="#"
+          class="btn btn-primary w-100"
+          @click.prevent="() => addToCart(product.id)"
+        >
+          加入購物車
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -74,7 +80,19 @@ export default {
 </script>
 
 <style>
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+}
 img {
   object-fit: cover;
+}
+.productImage {
+  height: 600px;
+}
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 </style>

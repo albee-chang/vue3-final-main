@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5 my-5 row justify-content-center">
+  <div class="mx-5 my-5 row justify-content-center" v-if="!cart.carts">
     <div class="my-2 text-primary">
       <i class="bi bi-arrow-right-circle-fill fs-6"></i> 購物車內容
     </div>
@@ -58,13 +58,13 @@
         </tr>
       </thead>
       <tbody>
-        <template v-if="cart.carts">
+        <template>
           <tr v-for="item in cart.carts" :key="item.id">
             <td>
               <button
                 type="button"
                 class="btn btn-outline-danger btn-sm"
-                @click="deleteCartItem(item)"
+                @click="() => deleteCartItem(item)"
               >
                 x
               </button>
@@ -124,6 +124,17 @@
       </button>
     </div>
   </div>
+  <div
+    class="mx-5 my-5 row d-flex justify-content-center align-items-center"
+    v-else
+  >
+  <div class="mt-5 text-center text-primary h1 fw-bold">購物車內無商品</div>
+    <div class="mt-5 text-center text-primary h3 fw-bold">
+      <RouterLink to="/" class="btn text-primary text-decoration-none"
+        >回到首頁</RouterLink
+      >
+    </div>
+  </div>
 </template>
 
 <script>
@@ -163,6 +174,9 @@ export default {
         .then(() => {
           this.getCartList();
           this.loadingItem = "";
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     deleteCartItem(item) {
@@ -172,6 +186,9 @@ export default {
         .then(() => {
           this.getCartList();
           this.loadingItem = "";
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     deleteAllCart() {
@@ -181,6 +198,9 @@ export default {
           this.getCartList();
           Swal.fire(`購物車已清空`);
           this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },
